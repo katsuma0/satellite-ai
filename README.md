@@ -49,12 +49,17 @@ When you're out of coverage, the satellite UI appears in Messages. You text the 
 > *"What's the boiling point of water at 10,000 ft?"*
 
 ### 2. Relay phone (the Shortcut automation)
+
+> **Template Shortcut:** [Get the Satellite AI Shortcut](https://www.icloud.com/shortcuts/99c5e990c7dd413abfc2e013c0d700e3)
+>
+> Open this link on the **relay phone** and tap **Add Shortcut**. Then set up the automation below so it runs automatically.
+
 On the relay phone, create a **Personal Automation** in the Shortcuts app:
 
 - **Trigger:** *Message*: when a message is received **from the field phone's contact**
 - **Run immediately** (turn off "Ask Before Running" / notifications so it works hands-free)
 
-The Shortcut itself is short:
+Have the automation run the template Shortcut. In outline, it does this:
 
 ```
 1. Receive the message content (Shortcut Input)
