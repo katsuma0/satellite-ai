@@ -37,7 +37,7 @@ The reply goes back over satellite, so you get answers from an AI on a mountain,
 | **Field phone** | An iPhone with Messages via satellite (iPhone 14 or newer, on a recent iOS version, in a country where the feature is offered) |
 | **Relay phone** | Any second iPhone that can run Shortcuts automations. It needs its **own phone number or Apple Account** so the two phones can text each other |
 | **Power + internet for the relay** | The relay phone stays at home, plugged in and on Wi-Fi/cellular, 24/7 |
-| **An AI source** | Any of these: Apple Intelligence's built-in model (on supported devices), the ChatGPT integration, or an AI API called with Shortcuts' *Get Contents of URL* action |
+| **An AI source** | The template uses the Claude app's *Ask Claude* Shortcuts action. Apple Intelligence's *Use Model* or the ChatGPT integration also work |
 
 ---
 
@@ -50,25 +50,23 @@ When you're out of coverage, the satellite UI appears in Messages. You text the 
 
 ### 2. Relay phone (the Shortcut automation)
 
-> **Template Shortcut:** [Get the Satellite AI Shortcut](https://www.icloud.com/shortcuts/99c5e990c7dd413abfc2e013c0d700e3)
+> **Template Shortcut:** [Get the Satellite AI Shortcut](https://www.icloud.com/shortcuts/c1e7b92d98e847148b42ebc46584f04e)
 >
-> Open this link on the **relay phone** and tap **Add Shortcut**. Then set up the automation below so it runs automatically.
+> Open this link on the **relay phone** and tap **Add Shortcut**. Then change the placeholder address `test@icloud.com` to the field phone's phone number or Apple Account email.
 
-On the relay phone, create a **Personal Automation** in the Shortcuts app:
+<p align="center">
+  <img src="images/shortcut-automation.png" alt="Satellite AI automation in the Shortcuts app: When I receive a message where Sender is test@icloud.com, then Ask Claude with the Message, then Send the Ask Claude result to test@icloud.com" width="320">
+</p>
 
-- **Trigger:** *Message*: when a message is received **from the field phone's contact**
-- **Run immediately** (turn off "Ask Before Running" / notifications so it works hands-free)
+The automation has three parts:
 
-Have the automation run the template Shortcut. In outline, it does this:
+| Step | Action | Setting |
+|---|---|---|
+| **Trigger** | *When I receive a message* | Filter **Sender is** the field phone's address. Turn **Automation** on and **Confirm Before Run** off so it runs hands-free |
+| **1** | *Ask Claude* | Input: the received **Message** |
+| **2** | *Send Message* | Send the **Ask Claude** result to the field phone's address |
 
-```
-1. Receive the message content (Shortcut Input)
-2. Send it to an AI
-     → e.g. "Use Model" (Apple Intelligence), "Ask ChatGPT",
-       or "Get Contents of URL" (POST to an AI API)
-3. (Optional) Trim / summarize the response so it's short
-4. Send Message → [AI response] → to the field phone's contact
-```
+The *Ask Claude* action comes from the Claude app, which must be installed and signed in on the relay phone. You can swap it for another AI action, such as Apple Intelligence's *Use Model* or *Ask ChatGPT*.
 
 ### 3. Field phone (receiving)
 The AI's answer comes back over satellite as a normal text.
@@ -89,7 +87,7 @@ The AI's answer comes back over satellite as a normal text.
 ## Is it really free?
 
 - **Satellite texting:** Apple has offered satellite features free on supported iPhones for a limited period. Check Apple's current terms for your device and region.
-- **AI:** Apple Intelligence's on-device / Private Cloud Compute models and the ChatGPT integration's free tier cost nothing. Paid AI APIs charge per request.
+- **AI:** The *Ask Claude* action uses your Claude account, so it falls under that account's plan and usage limits. Apple Intelligence's models and the ChatGPT integration's free tier cost nothing.
 - **Relay phone:** An old spare iPhone works. It needs a way to receive messages (its own number or Apple Account).
 
 ---
